@@ -126,6 +126,15 @@ public partial class @BNH_InputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shift"",
+                    ""type"": ""Button"",
+                    ""id"": ""805e4e20-276c-4db0-b5ce-16279e5bc69f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -274,8 +283,8 @@ public partial class @BNH_InputSystem: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""02dc24d3-4a11-4bfd-9e7f-09b6a6b90faa"",
-                    ""path"": """",
+                    ""id"": ""b72b3280-a264-47bd-86d3-71cf7903d5d1"",
+                    ""path"": ""<Keyboard>/ctrl"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -285,12 +294,12 @@ public partial class @BNH_InputSystem: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b72b3280-a264-47bd-86d3-71cf7903d5d1"",
-                    ""path"": """",
+                    ""id"": ""f0dbc557-0a45-479d-aaca-e85b810d49c6"",
+                    ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Control"",
+                    ""action"": ""Shift"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -366,6 +375,7 @@ public partial class @BNH_InputSystem: IInputActionCollection2, IDisposable
         m_PlayerControl_MousePos = m_PlayerControl.FindAction("MousePos", throwIfNotFound: true);
         m_PlayerControl_MouseLeftClick = m_PlayerControl.FindAction("MouseLeftClick", throwIfNotFound: true);
         m_PlayerControl_Control = m_PlayerControl.FindAction("Control", throwIfNotFound: true);
+        m_PlayerControl_Shift = m_PlayerControl.FindAction("Shift", throwIfNotFound: true);
     }
 
     ~@BNH_InputSystem()
@@ -450,6 +460,7 @@ public partial class @BNH_InputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControl_MousePos;
     private readonly InputAction m_PlayerControl_MouseLeftClick;
     private readonly InputAction m_PlayerControl_Control;
+    private readonly InputAction m_PlayerControl_Shift;
     /// <summary>
     /// Provides access to input actions defined in input action map "PlayerControl".
     /// </summary>
@@ -477,6 +488,10 @@ public partial class @BNH_InputSystem: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerControl/Control".
         /// </summary>
         public InputAction @Control => m_Wrapper.m_PlayerControl_Control;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerControl/Shift".
+        /// </summary>
+        public InputAction @Shift => m_Wrapper.m_PlayerControl_Shift;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -515,6 +530,9 @@ public partial class @BNH_InputSystem: IInputActionCollection2, IDisposable
             @Control.started += instance.OnControl;
             @Control.performed += instance.OnControl;
             @Control.canceled += instance.OnControl;
+            @Shift.started += instance.OnShift;
+            @Shift.performed += instance.OnShift;
+            @Shift.canceled += instance.OnShift;
         }
 
         /// <summary>
@@ -538,6 +556,9 @@ public partial class @BNH_InputSystem: IInputActionCollection2, IDisposable
             @Control.started -= instance.OnControl;
             @Control.performed -= instance.OnControl;
             @Control.canceled -= instance.OnControl;
+            @Shift.started -= instance.OnShift;
+            @Shift.performed -= instance.OnShift;
+            @Shift.canceled -= instance.OnShift;
         }
 
         /// <summary>
@@ -671,5 +692,12 @@ public partial class @BNH_InputSystem: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnControl(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Shift" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnShift(InputAction.CallbackContext context);
     }
 }

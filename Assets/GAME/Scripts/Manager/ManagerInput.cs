@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class ManagerInput : MonoBehaviour
@@ -8,7 +9,7 @@ public class ManagerInput : MonoBehaviour
     private BNH_InputSystem gameInputSystem;
     public event Action<Vector2> OnMoveInput;
     public event Action<bool> OnMouseClickInput;
-    public event Action<bool> OnControlInput;
+    public event Action onShiftPressed;
     private void Awake()
     {
         if (Instance == null)
@@ -28,6 +29,8 @@ public class ManagerInput : MonoBehaviour
 
         gameInputSystem.PlayerControl.MouseLeftClick.started += ctx => OnMouseClickInput?.Invoke(true);
         gameInputSystem.PlayerControl.MouseLeftClick.canceled += ctx => OnMouseClickInput?.Invoke(false);
+
+        gameInputSystem.PlayerControl.Shift.started += ctx => onShiftPressed?.Invoke();
 
 
     }

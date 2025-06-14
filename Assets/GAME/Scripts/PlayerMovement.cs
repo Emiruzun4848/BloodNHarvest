@@ -5,45 +5,63 @@ public class PlayerMovement : MonoBehaviour
 {
     CharacterController controller;
 
-    [SerializeField] float Gravity = -9.81f;
+    [SerializeField]  float  Gravity = -9.81f;
     [SerializeField] Vector3 moveDirect;
-    [SerializeField] float Speed = 1f;
+    [SerializeField] float currentGravity;
+    [SerializeField] float speed = 1f;
 
     void Start()
     {
         if (ManagerInput.Instance != null)
+        {
             ManagerInput.Instance.OnMoveInput += HandleMovement;
+            ManagerInput.Instance.onShiftPressed += Dash;
+
+        }
 
         moveDirect = Vector3.zero;
         controller = GetComponent<CharacterController>();
     }
     private void Update()
     {
+        Movement();
+    }
+    void Movement()
+    {
         ApplyGravity();
-        controller.Move(moveDirect * Time.deltaTime);
-        
-
+        Vector3 move = moveDirect * speed;
+        move.y = currentGravity;
+        move *= Time.deltaTime;
+        controller.Move(move);
     }
     private void ApplyGravity()
     {
         if (controller.isGrounded && moveDirect.y < 0)
         {
-            moveDirect.y = -2f; // Yere yapışık kalması için küçük negatif değer
+            currentGravity = -2f;
         }
         else
         {
-            moveDirect.y += Gravity * Time.deltaTime;
+            currentGravity += Gravity * Time.deltaTime;
         }
     }
     private void HandleMovement(Vector2 movementInput)
     {
-        moveDirect.x = movementInput.x * Speed;
-        moveDirect.z = movementInput.y * Speed;
+        moveDirect.x = movementInput.x;
+        moveDirect.z = movementInput.y;
+    }
+
+    public void Dash()
+    {
+
     }
 
     void OnDestroy()
     {
         if (ManagerInput.Instance != null)
+        {
             ManagerInput.Instance.OnMoveInput -= HandleMovement;
+            ManagerInput.Instance.onShiftPressed -= Dash;
+        }
     }
 }

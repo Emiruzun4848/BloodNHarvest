@@ -892,7 +892,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Gravity: -9.81
   moveDirect: {x: 0, y: 0, z: 0}
-  Speed: 5
+  currentGravity: 0
+  speed: 5
 --- !u!143 &1033580493
 CharacterController:
   m_ObjectHideFlags: 0

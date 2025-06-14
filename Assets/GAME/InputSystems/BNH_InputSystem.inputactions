@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Shift",
+                    "type": "Button",
+                    "id": "805e4e20-276c-4db0-b5ce-16279e5bc69f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -188,8 +197,8 @@
                 },
                 {
                     "name": "",
-                    "id": "02dc24d3-4a11-4bfd-9e7f-09b6a6b90faa",
-                    "path": "",
+                    "id": "b72b3280-a264-47bd-86d3-71cf7903d5d1",
+                    "path": "<Keyboard>/ctrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -199,12 +208,12 @@
                 },
                 {
                     "name": "",
-                    "id": "b72b3280-a264-47bd-86d3-71cf7903d5d1",
-                    "path": "",
+                    "id": "f0dbc557-0a45-479d-aaca-e85b810d49c6",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Control",
+                    "action": "Shift",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
