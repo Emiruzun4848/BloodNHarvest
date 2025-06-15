@@ -35,11 +35,12 @@ public class ManagerInput : MonoBehaviour
 
     }
     #region Return Functions
-    public Vector2 GetMousePosition()
-{
-    return gameInputSystem.PlayerControl.MousePos.ReadValue<Vector2>();
-}
-public RaycastHit? GetMouseHit()
+    public Vector2 GetMousePosition() => gameInputSystem.PlayerControl.MousePos.ReadValue<Vector2>();
+    public bool isPressedMouseClick() => gameInputSystem.PlayerControl.MouseLeftClick.WasPressedThisFrame();
+    public bool isHoldMouseClick() => gameInputSystem.PlayerControl.MouseLeftClick.IsPressed();
+    public bool isHoldControlButton() => gameInputSystem.PlayerControl.Control.IsPressed();
+   
+    public RaycastHit? GetMouseHit()
 {
     if (EventSystem.current.IsPointerOverGameObject())
         return null;
@@ -52,9 +53,7 @@ public RaycastHit? GetMouseHit()
     }
     return null;
 }
-public bool isPressedMouseClick() => gameInputSystem.PlayerControl.MouseLeftClick.WasPressedThisFrame();
-public bool isHoldMouseClick() => gameInputSystem.PlayerControl.MouseLeftClick.IsPressed();
-public bool isHoldControlButton() => gameInputSystem.PlayerControl.Control.IsPressed();
+
 
 
 #endregion

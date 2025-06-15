@@ -894,6 +894,9 @@ MonoBehaviour:
   moveDirect: {x: 0, y: 0, z: 0}
   currentGravity: 0
   speed: 5
+  dashSpeed: 40
+  dashDuration: 0.2
+  dashCooldown: 2
 --- !u!143 &1033580493
 CharacterController:
   m_ObjectHideFlags: 0
