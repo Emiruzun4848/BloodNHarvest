@@ -802,6 +802,7 @@ GameObject:
   - component: {fileID: 1033580490}
   - component: {fileID: 1033580489}
   - component: {fileID: 1033580493}
+  - component: {fileID: 1033580494}
   - component: {fileID: 1033580492}
   m_Layer: 0
   m_Name: Player
@@ -890,10 +891,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a706b3e95b15644f978e6b5f3a26db0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 0}
   Gravity: -9.81
   moveDirect: {x: 0, y: 0, z: 0}
   currentGravity: 0
-  speed: 5
   dashSpeed: 40
   dashDuration: 0.2
   dashCooldown: 2
@@ -922,6 +923,32 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1033580494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033580487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 835d9a79d7eae204892849c604ca1a7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    isAlive: 1
+    healthStats:
+      maxHealth: 100
+      health: 100
+      regen: 0.2
+    manaStats:
+      maxMana: 150
+      mana: 150
+      regen: 0.5
+    speedStats:
+      baseSpeed: 5
+      speed: 5
+  playerMovement: {fileID: 1033580492}
 --- !u!1 &1034947722
 GameObject:
   m_ObjectHideFlags: 0

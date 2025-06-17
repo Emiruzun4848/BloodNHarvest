@@ -1,15 +1,14 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+[RequireComponent(typeof(Player))]
+public class PlayerMovement : MonoBehaviour, IMovable
 {
     CharacterController controller;
-
+    public Player Player;
     [Header("Movement Settings")]
     [SerializeField] float Gravity = -9.81f;
     [SerializeField] Vector3 moveDirect;
     [SerializeField] float currentGravity;
-    [SerializeField] float speed = 1f;
 
     [Header("Dash Settings")]
     [SerializeField] private float dashSpeed = 10f;
@@ -20,6 +19,10 @@ public class PlayerMovement : MonoBehaviour
     private float dashTimer = 0f;
     private Vector3 dashDirection;
 
+    private void Awake()
+    {
+        Player = GetComponent<Player>();
+    }
     void Start()
     {
         if (ManagerInput.Instance != null)
@@ -46,12 +49,12 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            Movement();
+            Move();
         }
     }
-    void Movement()
+    public void Move()
     {
-        Vector3 move = moveDirect * speed;
+        Vector3 move = moveDirect * Player.stats.speedStats.Speed;
         move *= Time.deltaTime;
         controller.Move(move);
     }
@@ -106,4 +109,5 @@ public class PlayerMovement : MonoBehaviour
             ManagerInput.Instance.onShiftPressed -= Dash;
         }
     }
+
 }
