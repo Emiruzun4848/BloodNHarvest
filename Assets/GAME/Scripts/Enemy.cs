@@ -10,7 +10,6 @@ public class Enemy : Character
 {
     public EnemyMovement enemyMovement;
     public EnemyAttack enemyAttack;
-    public Transform target; // Düşmanın hedefi, örneğin oyuncu olabilir.
     public float specialAbilityCooldown = 5f; 
     public float specialManaAmount = 100;
 

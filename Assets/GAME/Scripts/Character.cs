@@ -7,6 +7,8 @@ public abstract class Character : MonoBehaviour
 {
     public CharacterStats stats = new CharacterStats();
 
+    public Transform target;
+
     #region Change Stats Mehods
     public virtual void TakeDamage(float amount)
     {
