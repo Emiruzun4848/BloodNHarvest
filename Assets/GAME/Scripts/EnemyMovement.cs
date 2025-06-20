@@ -21,14 +21,6 @@ public class EnemyMovement : MonoBehaviour, IMovable
         pos.y = yAxis;
         transform.position = pos;
     }
-    /*
-    public void Move()
-    {
-        Vector3 newpos = enemy.target.position - transform.position;
-        newpos = newpos.normalized * enemy.stats.speedStats.Speed * Time.deltaTime;
-        transform.position += newpos;
-    }
-    */
     public void Move()
     {
         if (canMovable)

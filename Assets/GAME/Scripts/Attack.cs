@@ -1,36 +1,56 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Timers;
+using UnityEngine;
 
-public class Attack : MonoBehaviour
+public abstract class Attack : MonoBehaviour
 {
-    public Character character;
-    public float attackRange = 2f; // Close range attack distance
-    public float attackCooldown = 1f; // Time between attacks
-    private float currentAttackCooldown = 0f;
-    public bool CanAttackable = true;
-    private void Awake()
+    public AttackManager attackManager;
+    public AttackType attackType;
+    public AttackPower attackPower;
+    public float damage = 10f;
+    public float attackCooldown = 1f;
+    protected float attackTimer = 0f;
+    public bool canAttack = true;
+    public bool isAttacking = false;
+    protected virtual void Start()
     {
-         character = GetComponent<Enemy>();
-        currentAttackCooldown = 0f;
+        // Initialize attack properties if needed
     }
-    private void Update()
+
+    protected virtual void Update()
     {
-        currentAttackCooldown -= Time.deltaTime;
-        if (CanAttackable && currentAttackCooldown <= 0)
+     Att();
+    }
+    protected void Att()
+    {
+        if (isAttacking == false )
         {
-            if (character.target != null && CanAttack())
+            if(attackTimer>=0)
+            attackTimer -= Time.deltaTime;
+            else
             {
-                PerformAttack();
+                if (canAttack)
+                {
+                    DoAttack();
+                }
             }
         }
     }
-    private bool CanAttack()
+    public void DoAttack()
     {
-        return Vector3.Distance(transform.position, character.target.position) <= attackRange;
+       StartCoroutine(PrepareAttack());
     }
-    private void PerformAttack()
+    protected IEnumerator PrepareAttack()
     {
-        // Implement the attack logic here
-        Debug.Log("Enemy attacks!");
-        currentAttackCooldown = attackCooldown; // Reset cooldown after attack
+        isAttacking = true;
+        yield return new WaitForSeconds(attackCooldown);
+        DoThatAttack();
+
     }
+    protected virtual void DoThatAttack()
+    {
+        isAttacking=false;
+    }
+
+
 }

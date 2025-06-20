@@ -10,16 +10,30 @@ public abstract class Character : MonoBehaviour
     public Transform target;
 
     #region Change Stats Mehods
-    public virtual void TakeDamage(float amount)
+    public virtual void TakeDamage(float damage,AttackPower attackPower,PenetrationStats penetrationStats)
     {
-        if (amount > 0)
-            stats.healthStats.Health -= amount;
+        float tot, totPercent;
+        if (attackPower == AttackPower.Physical)
+        {
+            tot = stats.defenseStats.TotalArmor - penetrationStats.ArmorPenetration;
+            totPercent = stats.defenseStats.TotalArmorPercent - penetrationStats.ArmorPenetrationPercent;
+        }
+        else
+        {
+            tot = stats.defenseStats.TotalMagicResist - penetrationStats.MagicPenetration;
+            totPercent = stats.defenseStats.TotalMagicResistPercent - penetrationStats.MagicPenetrationPercent;
+        }
+        tot = Mathf.Max(0, tot);
+        totPercent = Mathf.Max(0, totPercent);
+        float newDamage = damage - tot;
+        newDamage = newDamage*(100-totPercent)/100;
+        newDamage = Mathf.Max(0, newDamage);
+        stats.healthStats.Health -= newDamage;
         if (stats.healthStats.Health <= 0)
         {
             BeforeDie();
         }
     }
-
     public virtual void Heal(float amount)
     {
         if (amount > 0)
