@@ -9,19 +9,19 @@ public class Enemy : Character
 
     private void Awake()
     {
-        target = GameObject.Find("Player").transform; // Oyuncu objesini bul ve hedef olarak ata
+        target = GameObject.Find("Player").GetComponent<Character>(); // Oyuncu objesini bul ve hedef olarak ata
         enemyMovement = GetComponent<EnemyMovement>();
         attackManager = GetComponent<AttackManager>();
     }
 
     public void Pause()
     {
-        //enemyAttack.CanAttackable = false;
+        attackManager.CanAttack = false;
         enemyMovement.canMovable = false;
     }
     public void Resume()
     {
-        //enemyAttack.CanAttackable = true;
+        attackManager.CanAttack = true;
         enemyMovement.canMovable = true;
     }
 }

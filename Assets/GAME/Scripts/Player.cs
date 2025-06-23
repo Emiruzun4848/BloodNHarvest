@@ -4,15 +4,37 @@ using UnityEngine;
 public class Player : Character
 {
     public PlayerMovement playerMovement;
+    public AttackManager attackManager;
     [SerializeField] float detectRadius = 10f;
 
     private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
     }
-    private void Update()
+    public void Pause()
+    {
+        attackManager.CanAttack = false;
+        playerMovement.CanMoveable = false;
+    }
+    public void Resume()
+    {
+        attackManager.CanAttack = true;
+        playerMovement.CanMoveable = true;
+    }
+    protected override void Update()
     {
         SetCloseEnemy();
+        base.Update();
+    }
+    protected override void BeforeDie()
+    {
+   
+        GameManager.Instance?.PauseGame();
+        base.BeforeDie();
+    }
+    protected override void AfterDie()
+    {
+        Destroy(gameObject,5f);
     }
     void SetCloseEnemy()
     {
@@ -23,7 +45,7 @@ public class Player : Character
 
         foreach (Collider col in hits)
         {
-            if (col.CompareTag("Enemy"))
+            if (col.CompareTag("Enemies"))
             {
                 float distance = Vector3.Distance(transform.position, col.transform.position);
                 if (distance < closestDistance)
@@ -33,8 +55,8 @@ public class Player : Character
                 }
             }
         }
-
-        target = closestEnemy;
+        if (target != null)
+            target = closestEnemy.GetComponent<Character>();
     }
 
     void OnDrawGizmosSelected()

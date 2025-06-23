@@ -7,7 +7,7 @@ public abstract class Character : MonoBehaviour
 {
     public CharacterStats stats = new CharacterStats();
 
-    public Transform target;
+    public Character target;
 
     #region Change Stats Mehods
     public virtual void TakeDamage(float damage,AttackPower attackPower,PenetrationStats penetrationStats)
@@ -25,8 +25,8 @@ public abstract class Character : MonoBehaviour
         }
         tot = Mathf.Max(0, tot);
         totPercent = Mathf.Max(0, totPercent);
-        float newDamage = damage - tot;
-        newDamage = newDamage*(100-totPercent)/100;
+        float newDamage = damage*(100-totPercent)/100;
+        newDamage -= tot;
         newDamage = Mathf.Max(0, newDamage);
         stats.healthStats.Health -= newDamage;
         if (stats.healthStats.Health <= 0)
@@ -99,7 +99,7 @@ public abstract class Character : MonoBehaviour
     /// </summary>
     protected virtual void AfterDie()
     {
-
+        Debug.Log($"{gameObject.name} has died.");
         Destroy(gameObject);
     }
 }

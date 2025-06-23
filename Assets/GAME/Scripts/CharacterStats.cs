@@ -16,7 +16,7 @@ public class HealthStats
     public float Health
     {
         get => health;
-        set => health = Mathf.Clamp(value, 0, MaxHealth);
+        set => health = Mathf.Clamp(value, float.MinValue, MaxHealth);
     }
 
     public float Regen
@@ -71,6 +71,7 @@ public class SpeedStats
     }
 }
 
+[System.Serializable]
 public class PenetrationStats
 {
     [SerializeField] private float armorPenetration = 0f;
@@ -188,6 +189,8 @@ public class DefenseStats
 [System.Serializable]
 public class CharacterStats
 {
+    public Character mycharacter;
+
     [Header("Variables")]
     public bool isAlive = true;
 

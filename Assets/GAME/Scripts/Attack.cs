@@ -1,46 +1,71 @@
-﻿using System.Collections;
-using System.Timers;
+﻿
 using UnityEngine;
+using System.Collections;
+using System;
+using System.Timers;
 
+
+[RequireComponent(typeof(AttackManager))]
 public abstract class Attack : MonoBehaviour
 {
     public AttackManager attackManager;
     public AttackType attackType;
     public AttackPower attackPower;
+    public event Action OnAttackStarted;
+    public event Action OnAttackEnded;
+
     public float damage = 10f;
     public float attackCooldown = 1f;
     protected float attackTimer = 0f;
+    public bool attackCondition = true;
     public bool canAttack = true;
     public bool isAttacking = false;
+
     protected virtual void Start()
     {
-        // Initialize attack properties if needed
+        attackManager = GetComponent<AttackManager>();
     }
 
     protected virtual void Update()
     {
-     Att();
-    }
-    protected void Att()
-    {
-        if (isAttacking == false )
+        if (TimerElapsed())
         {
-            if(attackTimer>=0)
-            attackTimer -= Time.deltaTime;
-            else
-            {
-                if (canAttack)
-                {
-                    DoAttack();
-                }
-            }
+            DoAttack();
         }
     }
-    public void DoAttack()
+    protected virtual bool TimerElapsed()
     {
-       StartCoroutine(PrepareAttack());
+        if (isAttacking == false)
+        {
+            if (attackTimer <= 0)
+            {
+                AttackCondition();
+                if (canAttack && attackCondition)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                attackTimer -= Time.deltaTime;
+            }
+        }
+
+        return false;
     }
-    protected IEnumerator PrepareAttack()
+    protected virtual void AttackCondition()
+    {
+
+    }
+    protected virtual void ResetAttackTimer()
+    {
+        attackTimer = attackCooldown;
+    }
+    public virtual void DoAttack()
+    {
+        StartCoroutine(PrepareAttack());
+    }
+    protected virtual IEnumerator PrepareAttack()
     {
         isAttacking = true;
         yield return new WaitForSeconds(attackCooldown);
@@ -49,7 +74,12 @@ public abstract class Attack : MonoBehaviour
     }
     protected virtual void DoThatAttack()
     {
-        isAttacking=false;
+        AfterAttack();
+    }
+    protected virtual void AfterAttack()
+    {
+        isAttacking = false;
+        ResetAttackTimer();
     }
 
 

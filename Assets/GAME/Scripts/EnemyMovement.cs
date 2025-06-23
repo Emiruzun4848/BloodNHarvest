@@ -25,7 +25,7 @@ public class EnemyMovement : MonoBehaviour, IMovable
     {
         if (canMovable)
         {
-            Vector3 direction = enemy.target.position - transform.position;
+            Vector3 direction = enemy.target.transform.position - transform.position;
             float distanceToTarget = direction.magnitude;
 
             float moveDistance = enemy.stats.speedStats.Speed * Time.deltaTime;
@@ -33,7 +33,7 @@ public class EnemyMovement : MonoBehaviour, IMovable
             // Eðer hareket mesafesi hedefe olan mesafeden büyükse, hedefin tam üstüne git
             if (moveDistance >= distanceToTarget)
             {
-                transform.position = enemy.target.position;
+                transform.position = enemy.target.transform.position;
             }
             else
             {

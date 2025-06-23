@@ -4,6 +4,8 @@ public class PlayerMovement : MonoBehaviour, IMovable
 {
     CharacterController controller;
     public Player Player;
+    public bool CanMoveable { get; set; } = true;
+
     [Header("Movement Settings")]
     [SerializeField] float Gravity = -9.81f;
     [SerializeField] Vector3 moveDirect;
@@ -41,6 +43,9 @@ public class PlayerMovement : MonoBehaviour, IMovable
     }
     private void Update()
     {
+        if (!CanMoveable)
+            return;
+
         ApplyGravity();
         if (isDashing)
         {
