@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMovement))]
 public class Player : Character
 {
+    public bool isAlive = true;
     public PlayerMovement playerMovement;
     public AttackManager attackManager;
     [SerializeField] float detectRadius = 10f;
@@ -10,6 +11,7 @@ public class Player : Character
     private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        attackManager = GetComponent<AttackManager>();
     }
     public void Pause()
     {
@@ -26,10 +28,20 @@ public class Player : Character
         SetCloseEnemy();
         base.Update();
     }
+    protected override void AutoRegen()
+    {
+        if (isAlive)
+        {
+            base.AutoRegen();
+        }
+
+    }
     protected override void BeforeDie()
     {
    
         GameManager.Instance?.PauseGame();
+        isAlive = false;
+        Debug.Log($"{gameObject.name} is about to die.");
         base.BeforeDie();
     }
     protected override void AfterDie()

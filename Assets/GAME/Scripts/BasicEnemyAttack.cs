@@ -39,7 +39,7 @@ public class BasicEnemyAttack : Attack
             {
                 if (attackManager.myCharacter.target != null && attackManager.myCharacter.target.stats.isAlive)
                 {
-                    attackManager.myCharacter.target.TakeDamage(10, attackPower, attackManager.myCharacter.stats.penetrationStats);
+                    attackManager.myCharacter.target.TakeDamage(attackDamage, attackPower, attackManager.myCharacter.stats.penetrationStats);
                 }
             }
         }

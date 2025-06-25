@@ -11,8 +11,6 @@ public abstract class Attack : MonoBehaviour
     public AttackManager attackManager;
     public AttackType attackType;
     public AttackPower attackPower;
-    public event Action OnAttackStarted;
-    public event Action OnAttackEnded;
 
     public float damage = 10f;
     public float attackCooldown = 1f;

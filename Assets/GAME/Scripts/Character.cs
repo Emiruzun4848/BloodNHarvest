@@ -8,9 +8,10 @@ public abstract class Character : MonoBehaviour
     public CharacterStats stats = new CharacterStats();
 
     public Character target;
+    public bool canRegen = true;
 
     #region Change Stats Mehods
-    public virtual void TakeDamage(float damage,AttackPower attackPower,PenetrationStats penetrationStats)
+    public virtual void TakeDamage(float damage, AttackPower attackPower, PenetrationStats penetrationStats)
     {
         float tot, totPercent;
         if (attackPower == AttackPower.Physical)
@@ -25,11 +26,12 @@ public abstract class Character : MonoBehaviour
         }
         tot = Mathf.Max(0, tot);
         totPercent = Mathf.Max(0, totPercent);
-        float newDamage = damage*(100-totPercent)/100;
+        float newDamage = damage * (100 - totPercent) / 100;
         newDamage -= tot;
         newDamage = Mathf.Max(0, newDamage);
         stats.healthStats.Health -= newDamage;
-        if (stats.healthStats.Health <= 0)
+        Debug.Log($"{gameObject.name} took {newDamage} damage. Remaining Health: {stats.healthStats.Health}");
+        if (stats.healthStats.Health <= 0.1f)
         {
             BeforeDie();
         }
@@ -66,13 +68,16 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void Update()
     {
-        
+
         AutoRegen();
     }
-    void AutoRegen()
+    protected virtual void  AutoRegen()
     {
-        Heal(stats.healthStats.Regen* Time.deltaTime);
-        IncreaseMana(stats.manaStats.Regen* Time.deltaTime);
+        if (!canRegen)
+            return;
+
+        Heal(stats.healthStats.Regen * Time.deltaTime);
+        IncreaseMana(stats.manaStats.Regen * Time.deltaTime);
     }
     /// <summary>
     /// Ölmeden Önceki İşlemler;
