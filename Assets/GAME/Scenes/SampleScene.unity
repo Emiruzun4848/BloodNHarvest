@@ -740,7 +740,7 @@ MonoBehaviour:
   attackType: 0
   attackPower: 1
   damage: 10
-  attackCooldown: 0.1
+  attackCooldown: 0
   attackCondition: 1
   canAttack: 1
   isAttacking: 0

@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 
 public abstract class Character : MonoBehaviour
 {
-    public CharacterStats stats = new CharacterStats();
+    public CharacterStats stats;
 
     public Character target;
     public bool canRegen = true;
