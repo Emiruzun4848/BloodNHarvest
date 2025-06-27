@@ -8,7 +8,8 @@ public class HealthStats
 {
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float health = 100f;
-    [SerializeField] private float regen = 0.2f;
+    [SerializeField] private float regen = 0f;
+    public Action<float, float> onHealthChanged;
     public virtual float MaxHealth
     {
         get => maxHealth;
@@ -21,6 +22,7 @@ public class HealthStats
         set
         {
             health = Mathf.Clamp(value, float.MinValue, MaxHealth);
+            onHealthChanged?.Invoke(health, MaxHealth);
         }
     }
 

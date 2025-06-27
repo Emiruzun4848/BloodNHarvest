@@ -6,12 +6,14 @@ public class Player : Character
     public bool isAlive = true;
     public PlayerMovement playerMovement;
     public AttackManager attackManager;
+    public UIManager PlayerUI;
     [SerializeField] float detectRadius = 10f;
 
     private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
         attackManager = GetComponent<AttackManager>();
+        PlayerUI 
     }
     public void Pause()
     {
