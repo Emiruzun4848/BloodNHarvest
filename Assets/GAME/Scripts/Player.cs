@@ -6,14 +6,22 @@ public class Player : Character
     public bool isAlive = true;
     public PlayerMovement playerMovement;
     public AttackManager attackManager;
-    public UIManager PlayerUI;
+    public NightUIManager nightUIManager;
     [SerializeField] float detectRadius = 10f;
 
     private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
         attackManager = GetComponent<AttackManager>();
-        PlayerUI 
+
+    }
+    private void Start()
+    {
+
+        nightUIManager = NightUIManager.Instance;
+        nightUIManager.player = this;
+        stats.healthStats.onHealthChanged += nightUIManager.ChangePlayerHealthUI;
+
     }
     public void Pause()
     {
@@ -40,7 +48,7 @@ public class Player : Character
     }
     protected override void BeforeDie()
     {
-   
+
         GameManager.Instance?.PauseGame();
         isAlive = false;
         Debug.Log($"{gameObject.name} is about to die.");
@@ -48,7 +56,7 @@ public class Player : Character
     }
     protected override void AfterDie()
     {
-        Destroy(gameObject,5f);
+        Destroy(gameObject, 5f);
     }
     void SetCloseEnemy()
     {

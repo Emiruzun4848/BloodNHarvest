@@ -9,7 +9,11 @@ public class HealthStats
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float health = 100f;
     [SerializeField] private float regen = 0f;
+
+    // Sadece Player ve Belki Bosslar için kullanılacak
     public Action<float, float> onHealthChanged;
+    [SerializeField] private float shield = 0f;
+    public Action<float> onShieldChanged;
     public virtual float MaxHealth
     {
         get => maxHealth;
@@ -30,6 +34,15 @@ public class HealthStats
     {
         get => regen;
         set => regen = value;
+    }
+    public virtual float Shield
+    {
+        get => shield;
+        set
+        {
+            shield = MathF.Max(0,value);
+            onShieldChanged?.Invoke(shield);
+        }
     }
 }
 [System.Serializable]
