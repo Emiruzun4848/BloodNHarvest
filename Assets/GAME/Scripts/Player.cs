@@ -77,7 +77,7 @@ public class Player : Character
                 }
             }
         }
-        if (target != null)
+        if (closestEnemy != null)
             target = closestEnemy.GetComponent<Character>();
     }
 

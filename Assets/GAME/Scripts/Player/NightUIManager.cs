@@ -59,11 +59,11 @@ public class NightUIManager : MonoBehaviour
         string formatted;
 
         if (newValue < 10)
-            formatted = newValue.ToString("0.###");    // ör. 1.23M
+            formatted = newValue.ToString("0.##");    // ör. 1.23M
         else if (newValue < 100)
-            formatted = newValue.ToString("0.##");     // ör. 12.3M
+            formatted = newValue.ToString("0.#");     // ör. 12.3M
         else
-            formatted = newValue.ToString("0.#");       // ör. 123M
+            formatted = newValue.ToString("0");       // ör. 123M
 
         return $"{formatted}{suffixes[suffixIndex]}";
     }

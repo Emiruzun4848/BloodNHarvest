@@ -3,7 +3,6 @@
 public class BasicEnemyAttack : Attack
 {
     public float attackRange = 2f;
-    public float attackDamage = 10f;
     protected override void AttackCondition()
     {
         if (attackManager.myCharacter.target != null)
@@ -39,7 +38,7 @@ public class BasicEnemyAttack : Attack
             {
                 if (attackManager.myCharacter.target != null && attackManager.myCharacter.target.stats.healthStats.Health>0)
                 {
-                    attackManager.myCharacter.target.TakeDamage(attackDamage, attackPower, attackManager.myCharacter.stats.penetrationStats);
+                    attackManager.myCharacter.target.TakeDamage(damage, attackPower, attackManager.myCharacter.stats.penetrationStats);
                 }
             }
         }
