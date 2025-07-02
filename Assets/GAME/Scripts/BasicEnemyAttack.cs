@@ -10,7 +10,8 @@ public class BasicEnemyAttack : Attack
             float distanceToTarget = Vector3.Distance(transform.position, attackManager.myCharacter.target.transform.position);
             if (distanceToTarget <= attackRange)
             {
-                if (attackManager.myCharacter.target != null && attackManager.myCharacter.target.stats.healthStats.Health>0)
+                HealthStats targetHealthStats = attackManager.myCharacter.target?.GetHealthStats();
+                if (targetHealthStats != null && targetHealthStats.Health>0)
                 {
                     attackCondition = true;
                 }
@@ -36,7 +37,8 @@ public class BasicEnemyAttack : Attack
             float distanceToTarget = Vector3.Distance(transform.position, attackManager.myCharacter.target.transform.position);
             if (distanceToTarget <= attackRange)
             {
-                if (attackManager.myCharacter.target != null && attackManager.myCharacter.target.stats.healthStats.Health>0)
+                HealthStats targetHealthStats = attackManager.myCharacter.target.GetHealthStats();
+                if (targetHealthStats != null && targetHealthStats.Health > 0)
                 {
                     attackManager.myCharacter.target.TakeDamage(damage, attackPower, attackManager.myCharacter.stats.penetrationStats);
                 }

@@ -34,7 +34,7 @@ public class NightUIManager : MonoBehaviour
     public void ChangePlayerHealthUI(float health, float maxHealth)
     {
         healthSlider.value = health;
-        healthSlider.maxValue = maxHealth;
+        healthSlider.maxValue = maxHealth;                        
         healthText.text = FormatNumber(health);
     }
     public void ChangePlayerShieldUI(float shieldAmount)

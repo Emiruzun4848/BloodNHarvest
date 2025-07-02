@@ -1,63 +1,43 @@
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
-public class Player : Character
+public class Player : CharacterPlus
 {
-    public bool isAlive = true;
-    public PlayerMovement playerMovement;
+    [Space(3)]
+    [Header("Player Settings")]
+    public PlayerMovement playerMovement; // Renamed to avoid ambiguity
     public AttackManager attackManager;
     public NightUIManager nightUIManager;
+
     [SerializeField] float detectRadius = 10f;
 
     private void Awake()
     {
-        playerMovement = GetComponent<PlayerMovement>();
+        playerMovement = GetComponent<PlayerMovement>(); // Updated reference
         attackManager = GetComponent<AttackManager>();
-
     }
     private void Start()
     {
-
         nightUIManager = NightUIManager.Instance;
         nightUIManager.player = this;
-        stats.healthStats.onHealthChanged += nightUIManager.ChangePlayerHealthUI;
-
+        healthStats.onHealthChanged += nightUIManager.ChangePlayerHealthUI;
     }
     public void Pause()
     {
         attackManager.CanAttack = false;
-        playerMovement.CanMoveable = false;
+        playerMovement.CanMoveable = false; // Updated reference
     }
     public void Resume()
     {
         attackManager.CanAttack = true;
-        playerMovement.CanMoveable = true;
+        playerMovement.CanMoveable = true; // Updated reference
     }
     protected override void Update()
     {
-        SetCloseEnemy();
         base.Update();
+        SetCloseEnemy();
     }
-    protected override void AutoRegen()
-    {
-        if (isAlive)
-        {
-            base.AutoRegen();
-        }
 
-    }
-    protected override void BeforeDie()
-    {
-
-        GameManager.Instance?.PauseGame();
-        isAlive = false;
-        Debug.Log($"{gameObject.name} is about to die.");
-        base.BeforeDie();
-    }
-    protected override void AfterDie()
-    {
-        Destroy(gameObject, 5f);
-    }
     void SetCloseEnemy()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, detectRadius);
@@ -78,7 +58,19 @@ public class Player : Character
             }
         }
         if (closestEnemy != null)
-            target = closestEnemy.GetComponent<Character>();
+            target = closestEnemy.GetComponent<EnemyCharacter>();
+    }
+
+    public override void BeforeDie()
+    {
+        GameManager.Instance?.PauseGame();
+        isAlive = false;
+        Debug.Log($"{gameObject.name} is about to die.");
+        base.BeforeDie();
+    }
+    public override void AfterDie()
+    {
+        Destroy(gameObject, 5f);
     }
 
     void OnDrawGizmosSelected()

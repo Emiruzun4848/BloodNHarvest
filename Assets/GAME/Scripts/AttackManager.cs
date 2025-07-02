@@ -12,7 +12,7 @@ public enum AttackPower
 }
 public class AttackManager : MonoBehaviour
 {
-    public Character myCharacter;
+    public BaseCharacter myCharacter;
     private bool canAttack = true;
     public List<Attack> allAttacks;
     public List<Attack> closeRangeAttack;
@@ -31,7 +31,7 @@ public class AttackManager : MonoBehaviour
     }
     private void Awake()
     {
-        myCharacter = GetComponent<Character>();
+        myCharacter = GetComponent<BaseCharacter>();
         allAttacks = new List<Attack>(GetComponents<Attack>());
 
     }

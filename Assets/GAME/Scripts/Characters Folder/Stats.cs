@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using UnityEngine;
 
 
@@ -6,14 +6,8 @@ using UnityEngine;
 [System.Serializable]
 public class HealthStats
 {
-    [SerializeField] private float maxHealth = 100f;
-    [SerializeField] private float health = 100f;
-    [SerializeField] private float regen = 0f;
-
-    // Sadece Player ve Belki Bosslar iÃ§in kullanÄ±lacak
-    public Action<float, float> onHealthChanged;
-    [SerializeField] private float shield = 0f;
-    public Action<float> onShieldChanged;
+    public float maxHealth = 100f;
+    public float health = 100f;
     public virtual float MaxHealth
     {
         get => maxHealth;
@@ -21,6 +15,26 @@ public class HealthStats
     }
 
     public virtual float Health
+    {
+        get => health;
+        set
+        {
+            health = Mathf.Clamp(value, float.MinValue, MaxHealth);
+        }
+    }
+}
+
+[System.Serializable]
+public class HealthStatsPLus : HealthStats
+{
+    [SerializeField] private float regen = 0f;
+
+    // Sadece Player ve Belki Bosslar için kullanýlacak
+    public Action<float, float> onHealthChanged;
+    [SerializeField] private float shield = 0f;
+    public Action<float> onShieldChanged;
+
+    public override float Health
     {
         get => health;
         set
@@ -40,11 +54,14 @@ public class HealthStats
         get => shield;
         set
         {
-            shield = MathF.Max(0,value);
+            shield = MathF.Max(0, value);
             onShieldChanged?.Invoke(shield);
         }
     }
 }
+
+
+
 [System.Serializable]
 public class ManaStats
 {
@@ -96,11 +113,11 @@ public class DefenseStats
     [SerializeField] private float defense = 0f;
     [SerializeField] private float defensePercent = 0f;
 
-    [Header("ZÄ±rh (Armor)")]
+    [Header("Zýrh (Armor)")]
     [SerializeField] private float armor = 0f;
     [SerializeField] private float armorPercent = 0f;
 
-    [Header("BÃ¼yÃ¼ Direnci (Magic Resist)")]
+    [Header("Büyü Direnci (Magic Resist)")]
     [SerializeField] private float magicResist = 0f;
     [SerializeField] private float magicResistPercent = 0f;
 
@@ -174,25 +191,4 @@ public class PenetrationStats
         get => magicPenetrationPercent;
         set => magicPenetrationPercent = Mathf.Max(0, value);
     }
-}
-
-[System.Serializable]
-public class CharacterStats
-{
-    public Character mycharacter;
-
-    [Header("Health Settings")]
-    public HealthStats healthStats;
-
-    [Header("Mana Settings")]
-    public ManaStats manaStats;
-
-    [Header("Speed Settings")]
-    public SpeedStats speedStats;
-
-    [Header("Penetration Stats")]
-    public PenetrationStats penetrationStats;
-
-    [Header("Defense Settings")]
-    public DefenseStats defenseStats;
 }
