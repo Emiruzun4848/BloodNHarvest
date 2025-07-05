@@ -45,7 +45,6 @@ public class NightUIManager : MonoBehaviour
 
     string FormatNumber(float value)
     {
-        Debug.Log($"Formatting value: {value}");
         double newValue = Mathf.Max(0,value);
         string[] suffixes = { "", "K", "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc", "No", "Dc" };
         int suffixIndex = 0;

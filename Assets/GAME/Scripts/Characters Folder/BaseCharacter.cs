@@ -14,7 +14,29 @@ public abstract class BaseCharacter : MonoBehaviour, IDiable,IDamagable, IHealth
     #region Change Stats Mehods
     public virtual void TakeDamage(float damage, AttackPower attackPower, PenetrationStats penetrationStats)
     {
-
+        float tot, totPercent;
+        if (attackPower == AttackPower.Physical)
+        {
+            tot = stats.defenseStats.TotalArmor - penetrationStats.ArmorPenetration;
+            totPercent = stats.defenseStats.TotalArmorPercent - penetrationStats.ArmorPenetrationPercent;
+        }
+        else
+        {
+            tot = stats.defenseStats.TotalMagicResist - penetrationStats.MagicPenetration;
+            totPercent = stats.defenseStats.TotalMagicResistPercent - penetrationStats.MagicPenetrationPercent;
+        }
+        tot = Mathf.Max(0, tot);
+        totPercent = Mathf.Max(0, totPercent);
+        float newDamage = damage * (100 - totPercent) / 100;
+        newDamage -= tot;
+        newDamage = Mathf.Max(0, newDamage);
+        GetHealthStats().Health -= newDamage;
+        Debug.Log($"{gameObject.name} took {newDamage} damage. Remaining Health: {GetHealthStats().Health}");
+        if (GetHealthStats().Health <= 0.1f)
+        {
+            BeforeDie();
+        }
+    
     }
 
     public virtual void IncreaseSpeed(float amount)
