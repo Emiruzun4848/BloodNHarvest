@@ -37,7 +37,11 @@ public abstract class Attack : MonoBehaviour
         {
             if (attackTimer <= 0)
             {
-                AttackCondition();
+                if (!IsNullTarget())
+                {
+                    AttackCondition();
+                }
+
                 if (canAttack && attackCondition)
                 {
                     return true;
@@ -49,6 +53,15 @@ public abstract class Attack : MonoBehaviour
             }
         }
 
+        return false;
+    }
+    protected bool IsNullTarget()
+    {
+        if (attackManager.myCharacter.target == null)
+        {
+            attackCondition = false;
+            return true;
+        }
         return false;
     }
     protected virtual void AttackCondition()

@@ -13,9 +13,12 @@ GameObject:
   - component: {fileID: 8706602656807991399}
   - component: {fileID: 40946561497107531}
   - component: {fileID: 5567761211672358637}
+  - component: {fileID: 809275427285716135}
+  - component: {fileID: 3415215935942868412}
+  - component: {fileID: 5059167465841036820}
   m_Layer: 0
   m_Name: Enemy-1
-  m_TagString: Player
+  m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,23 +103,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9ffe834134fdc4988265c682221926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mycharacter: {fileID: 0}
   stats:
-    isAlive: 1
-    healthStats:
-      maxHealth: 100
-      health: 100
-      regen: 0.2
-    manaStats:
-      maxMana: 300
-      mana: 30
-      regen: 0.5
     speedStats:
       baseSpeed: 5
       speed: 5
-  enemyMovement: {fileID: 0}
+    penetrationStats:
+      armorPenetration: 0
+      armorPenetrationPercent: 0
+      magicPenetration: 0
+      magicPenetrationPercent: 0
+    defenseStats:
+      defense: 0
+      defensePercent: 0
+      armor: 0
+      armorPercent: 0
+      magicResist: 0
+      magicResistPercent: 0
   target: {fileID: 0}
-  specialAbilityCooldown: 5
-  specialManaAmount: 100
+  healthStats:
+    maxHealth: 100
+    health: 100
+  enemyMovement: {fileID: 0}
+  attackManager: {fileID: 0}
 --- !u!114 &5567761211672358637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,4 +139,64 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
+  canMovable: 1
   yAxis: 1
+--- !u!114 &809275427285716135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7882743980712686198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 742601e54f5388f48aa8761f00fefc71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myCharacter: {fileID: 0}
+  allAttacks: []
+  closeRangeAttack: []
+--- !u!114 &3415215935942868412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7882743980712686198}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83c888e4f3f6eec4aabb509c9c10ae5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackManager: {fileID: 0}
+  attackType: 0
+  attackPower: 1
+  damage: 30
+  attackCooldown: 1
+  attackCondition: 1
+  canAttack: 1
+  isAttacking: 0
+  attackRange: 0.75
+--- !u!136 &5059167465841036820
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7882743980712686198}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
