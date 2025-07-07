@@ -75,12 +75,13 @@ public class PlayerMovement : MonoBehaviour, IMovable
     }
     private void ApplyGravity()
     {
-        if (controller.isGrounded && moveDirect.y < 0)
+        if ((controller.isGrounded && moveDirect.y <= 0) ||currentGravity<=-2)
         {
             currentGravity = -2f;
         }
         else
         {
+           
             currentGravity += Gravity * Time.deltaTime;
         }
         controller.Move(new Vector3(0, currentGravity, 0) * Time.deltaTime);

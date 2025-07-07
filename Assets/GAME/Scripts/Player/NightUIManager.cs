@@ -45,25 +45,29 @@ public class NightUIManager : MonoBehaviour
 
     string FormatNumber(float value)
     {
-        double newValue = Mathf.Max(0,value);
+        int newValue = (int)Mathf.Max(0, value);
+        int extendex = 0;
         string[] suffixes = { "", "K", "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc", "No", "Dc" };
         int suffixIndex = 0;
 
         while (newValue >= 1000 && suffixIndex < suffixes.Length - 1)
         {
+            extendex = newValue % 1000;
             newValue /= 1000;
             suffixIndex++;
         }
 
+        float shortValue = newValue + (extendex / 1000f);
         string formatted;
 
-        if (newValue < 10)
-            formatted = newValue.ToString("0.##");    // ör. 1.23M
-        else if (newValue < 100)
-            formatted = newValue.ToString("0.#");     // ör. 12.3M
+        if (shortValue < 10)
+            formatted = shortValue.ToString("0.00");
+        else if (shortValue < 100)
+            formatted = shortValue.ToString("0.0");
         else
-            formatted = newValue.ToString("0");       // ör. 123M
+            formatted = shortValue.ToString("0");
 
         return $"{formatted}{suffixes[suffixIndex]}";
     }
+
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LongRangeAttack : Attack
+public class LongTypeAttack : Attack
 {
     public GameObject projectilePrefab;
     public Vector3 firePoint;

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BasicEnemyAttack : Attack
+public class BasicCloseAttack : Attack
 {
     public float attackRange = 2f;
     protected override void AttackCondition()
