@@ -985,14 +985,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3415215935942868412, guid: c0b470b29ee7b634791a95dc36e53600, type: 3}
-      propertyPath: canAttack
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3415215935942868412, guid: c0b470b29ee7b634791a95dc36e53600, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7882743980712686198, guid: c0b470b29ee7b634791a95dc36e53600, type: 3}
       propertyPath: m_Name
       value: Enemy-1
@@ -1833,47 +1825,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1401234715 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7882743980712686198, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
-  m_PrefabInstance: {fileID: 7699693925526514957}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1401234721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401234715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 742601e54f5388f48aa8761f00fefc71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myCharacter: {fileID: 0}
-  allAttacks: []
-  closeRangeAttack: []
---- !u!114 &1401234722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401234715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83c888e4f3f6eec4aabb509c9c10ae5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackManager: {fileID: 0}
-  attackType: 0
-  attackPower: 0
-  damage: 10
-  attackCooldown: 1
-  attackCondition: 1
-  canAttack: 0
-  isAttacking: 0
-  attackRange: 2
 --- !u!1 &1492510057
 GameObject:
   m_ObjectHideFlags: 0
@@ -2459,25 +2410,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4801221549810455996, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
-      propertyPath: detectRadius
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4801221549810455996, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
-      propertyPath: stats.healthStats.health
-      value: 879465
-      objectReference: {fileID: 0}
-    - target: {fileID: 4801221549810455996, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
-      propertyPath: stats.healthStats.maxHealth
-      value: 1500
+    - target: {fileID: 1040278281468508638, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
+      propertyPath: bulletSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7882743980712686198, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7882743980712686198, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8478776144090118022, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2522,13 +2461,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7882743980712686198, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1401234721}
-    - targetCorrespondingSourceObject: {fileID: 7882743980712686198, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1401234722}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -3,12 +3,14 @@ using UnityEngine;
 public enum AttackType
 {
     CloseRange,
+    Bullet,
     LongRange
 }
 public enum AttackPower
 {
     Magic,
-    Physical
+    Physical,
+    Real
 }
 public class AttackManager : MonoBehaviour
 {

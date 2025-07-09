@@ -1,18 +1,22 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class LongTypeAttack : Attack
+public class TargetTypeAttack : Attack
 {
     public GameObject projectilePrefab;
-    public Vector3 firePoint;
     public float projectileSpeed = 20f;
+
     protected override void DoThatAttack()
     {
        
     }
-    public virtual void DoAttack()
+    public virtual void AttackCommand()
     {
        
 
-        base.DoAttack();
+        base.AttackCommand();
     }
+
+    
 }   

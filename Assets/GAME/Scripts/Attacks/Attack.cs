@@ -15,6 +15,7 @@ public abstract class Attack : MonoBehaviour
     public float damage = 10f;
     public float attackCooldown = 1f;
     protected float attackTimer = 0f;
+    public float attackRange = 2f;
     public bool attackCondition = true;
     public bool canAttack = true;
     public bool isAttacking = false;
@@ -28,7 +29,7 @@ public abstract class Attack : MonoBehaviour
     {
         if (TimerElapsed())
         {
-            DoAttack();
+            AttackCommand();
         }
     }
     protected virtual bool TimerElapsed()
@@ -66,13 +67,29 @@ public abstract class Attack : MonoBehaviour
     }
     protected virtual void AttackCondition()
     {
-
+        float distanceToTarget = Vector3.Distance(transform.position, attackManager.myCharacter.target.transform.position);
+        if (distanceToTarget <= attackRange)
+        {
+            HealthStats targetHealthStats = attackManager.myCharacter.target?.GetHealthStats();
+            if (targetHealthStats != null && targetHealthStats.Health > 0)
+            {
+                attackCondition = true;
+            }
+            else
+            {
+                attackCondition = false;
+            }
+        }
+        else
+        {
+            attackCondition = false;
+        }
     }
     protected virtual void ResetAttackTimer()
     {
         attackTimer = attackCooldown;
     }
-    public virtual void DoAttack()
+    public virtual void AttackCommand()
     {
         StartCoroutine(PrepareAttack());
     }

@@ -14,7 +14,7 @@ public abstract class BaseCharacter : MonoBehaviour, IDiable,IDamagable, IHealth
     #region Change Stats Mehods
     public virtual void TakeDamage(float damage, AttackPower attackPower, PenetrationStats penetrationStats)
     {
-        float tot, totPercent;
+        float tot = 0, totPercent = 0;
         if (attackPower == AttackPower.Physical)
         {
             tot = stats.defenseStats.TotalArmor - penetrationStats.ArmorPenetration;
@@ -31,7 +31,7 @@ public abstract class BaseCharacter : MonoBehaviour, IDiable,IDamagable, IHealth
         newDamage -= tot;
         newDamage = Mathf.Max(0, newDamage);
         GetHealthStats().Health -= newDamage;
-        Debug.Log($"{gameObject.name} took {newDamage} damage. Remaining Health: {GetHealthStats().Health}");
+        Debug.Log($"{gameObject.name} took {newDamage} {attackPower} damage. Remaining Health: {GetHealthStats().Health}");
         if (GetHealthStats().Health <= 0.1f)
         {
             BeforeDie();

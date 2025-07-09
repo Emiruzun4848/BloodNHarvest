@@ -14,7 +14,10 @@ GameObject:
   - component: {fileID: 5626158526845615574}
   - component: {fileID: 4801221549810455996}
   - component: {fileID: 3140920674892105311}
-  m_Layer: 0
+  - component: {fileID: 1884196260315627377}
+  - component: {fileID: 8337640246480460733}
+  - component: {fileID: 1040278281468508638}
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -126,20 +129,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835d9a79d7eae204892849c604ca1a7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mycharacter: {fileID: 0}
   stats:
-    isAlive: 1
-    healthStats:
-      maxHealth: 100
-      health: 100
-      regen: 0.2
-    manaStats:
-      maxMana: 150
-      mana: 150
-      regen: 0.5
     speedStats:
       baseSpeed: 5
       speed: 5
+    penetrationStats:
+      armorPenetration: 0
+      armorPenetrationPercent: 0
+      magicPenetration: 0
+      magicPenetrationPercent: 0
+    defenseStats:
+      defense: 0
+      defensePercent: 0
+      armor: 0
+      armorPercent: 0
+      magicResist: 0
+      magicResistPercent: 0
+  target: {fileID: 0}
+  healthStats:
+    maxHealth: 100
+    health: 100
+    regen: 0
+    shield: 0
+  manaStats:
+    maxMana: 100
+    mana: 100
+    regen: 0.2
+  isAlive: 1
+  canRegen: 1
   playerMovement: {fileID: 3140920674892105311}
+  attackManager: {fileID: 0}
+  nightUIManager: {fileID: 0}
+  detectRadius: 15
 --- !u!114 &3140920674892105311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,3 +181,66 @@ MonoBehaviour:
   dashSpeed: 40
   dashDuration: 0.2
   dashCooldown: 2
+--- !u!114 &1884196260315627377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7882743980712686198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 742601e54f5388f48aa8761f00fefc71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myCharacter: {fileID: 0}
+  allAttacks: []
+  closeRangeAttack: []
+--- !u!114 &8337640246480460733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7882743980712686198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83c888e4f3f6eec4aabb509c9c10ae5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackManager: {fileID: 0}
+  attackType: 0
+  attackPower: 0
+  damage: 10
+  attackCooldown: 1
+  attackRange: 2
+  attackCondition: 1
+  canAttack: 0
+  isAttacking: 0
+--- !u!114 &1040278281468508638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7882743980712686198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa7738fd39f6584db4a617c3ab2c8fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackManager: {fileID: 0}
+  attackType: 0
+  attackPower: 0
+  damage: 10
+  attackCooldown: 1.16
+  attackRange: 87.8
+  attackCondition: 1
+  canAttack: 1
+  isAttacking: 0
+  projectilePrefab: {fileID: 409209466184284457, guid: ef1cd703291189b408cd4915dd380e47, type: 3}
+  firePoint: {x: 0, y: 0, z: 0}
+  bulletsParent: {fileID: 0}
+  distanceToPlayer: 1
+  bulletSpeed: 0.15
+  bullets: []

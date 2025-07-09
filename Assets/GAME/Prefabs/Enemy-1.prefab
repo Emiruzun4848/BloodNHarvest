@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
-  canMovable: 1
+  canMovable: 0
   yAxis: 1
 --- !u!114 &809275427285716135
 MonoBehaviour:
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7882743980712686198}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83c888e4f3f6eec4aabb509c9c10ae5b, type: 3}
   m_Name: 
@@ -173,10 +173,10 @@ MonoBehaviour:
   attackPower: 1
   damage: 30
   attackCooldown: 1
-  attackCondition: 1
-  canAttack: 1
-  isAttacking: 0
   attackRange: 0.75
+  attackCondition: 1
+  canAttack: 0
+  isAttacking: 0
 --- !u!136 &5059167465841036820
 CapsuleCollider:
   m_ObjectHideFlags: 0
