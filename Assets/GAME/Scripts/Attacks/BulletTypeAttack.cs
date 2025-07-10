@@ -19,44 +19,45 @@ public class BulletTypeAttack : Attack
 
     protected override void DoThatAttack()
     {
-        if (attackManager.myCharacter.target == null)
+        if (attackManager.myCharacter.target != null)
         {
-                Debug.Log("Attacking");
-                Bullet bullet = GetBullet();
-                Vector3 basePos = attackManager.myCharacter.target.transform.position - transform.position;
-                Vector3 startPos = Vector3.Normalize(basePos) * distanceToPlayer + transform.position;
-                bullet.transform.position = startPos;
-                bullet.direction = basePos.normalized;
-                bullet.speed = bulletSpeed;
-                basePos.y = 0;
-                Quaternion targetRotation = Quaternion.LookRotation(basePos);
-                bullet.transform.rotation = targetRotation;
-                bullet.ResetVariable();
-                bullet.gameObject.SetActive(true);
-                Debug.Log("Attacked");
-            
-            base.DoThatAttack();
+            Debug.Log("Attacking");
+            Bullet bullet = GetBullet();
+            Vector3 basePos = attackManager.myCharacter.target.transform.position - transform.position;
+            Vector3 startPos = Vector3.Normalize(basePos) * distanceToPlayer + transform.position;
+            bullet.transform.position = startPos;
+            bullet.direction = basePos.normalized;
+            bullet.speed = bulletSpeed;
+            basePos.y = 0;
+            Quaternion targetRotation = Quaternion.LookRotation(basePos);
+            bullet.transform.rotation = targetRotation;
+            bullet.ResetVariable();
+            bullet.gameObject.SetActive(true);
+            Debug.Log("Attacked");
+
         }
 
-        Bullet GetBullet()
+        base.DoThatAttack();
+
+    }
+    Bullet GetBullet()
+    {
+        Debug.Log("Searching for an inactive bullet...");
+        foreach (Bullet bullet in bullets)
         {
-            Debug.Log("Searching for an inactive bullet...");
-            foreach (Bullet bullet in bullets)
+            if (!bullet.gameObject.activeSelf)
             {
-                if (!bullet.gameObject.activeSelf)
-                {
-                    return bullet;
-                }
+                return bullet;
             }
-            Debug.Log("No inactive bullets found, creating a new one.");
-            Bullet newBullet = Instantiate(projectilePrefab).GetComponent<Bullet>();
-            newBullet.bulletTypeAttack = this;
-            newBullet.transform.SetParent(bulletsParent);
-            bullets.Add(newBullet);
-            newBullet.gameObject.SetActive(false);
-            return newBullet;
-
-
         }
+        Debug.Log("No inactive bullets found, creating a new one.");
+        Bullet newBullet = Instantiate(projectilePrefab).GetComponent<Bullet>();
+        newBullet.bulletTypeAttack = this;
+        newBullet.transform.SetParent(bulletsParent);
+        bullets.Add(newBullet);
+        newBullet.gameObject.SetActive(false);
+        return newBullet;
+
+
     }
 }

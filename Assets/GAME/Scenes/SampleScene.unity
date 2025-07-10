@@ -2411,12 +2411,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1040278281468508638, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
+      propertyPath: canAttack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040278281468508638, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040278281468508638, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
       propertyPath: bulletSpeed
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7882743980712686198, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8337640246480460733, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
+      propertyPath: canAttack
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8478776144090118022, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
       propertyPath: m_LocalPosition.x
