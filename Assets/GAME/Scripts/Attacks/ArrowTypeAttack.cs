@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BulletTypeAttack : Attack
+public class ArrowTypeAttack : Attack
 {
     [Header("Bullet Type Attack")]
     public GameObject projectilePrefab;
@@ -10,7 +10,7 @@ public class BulletTypeAttack : Attack
     public Transform bulletsParent;
     public float distanceToPlayer = 1f;
     public float bulletSpeed;
-    [SerializeField] List<Bullet> bullets = new();
+    [SerializeField] List<ArrowBullet> bullets = new();
 
     private void Awake()
     {
@@ -21,7 +21,6 @@ public class BulletTypeAttack : Attack
     {
         if (attackManager.myCharacter.target != null)
         {
-            Debug.Log("Attacking");
             Bullet bullet = GetBullet();
             Vector3 basePos = attackManager.myCharacter.target.transform.position - transform.position;
             Vector3 startPos = Vector3.Normalize(basePos) * distanceToPlayer + transform.position;
@@ -33,7 +32,6 @@ public class BulletTypeAttack : Attack
             bullet.transform.rotation = targetRotation;
             bullet.ResetVariable();
             bullet.gameObject.SetActive(true);
-            Debug.Log("Attacked");
 
         }
 
@@ -42,7 +40,6 @@ public class BulletTypeAttack : Attack
     }
     Bullet GetBullet()
     {
-        Debug.Log("Searching for an inactive bullet...");
         foreach (Bullet bullet in bullets)
         {
             if (!bullet.gameObject.activeSelf)
@@ -50,9 +47,8 @@ public class BulletTypeAttack : Attack
                 return bullet;
             }
         }
-        Debug.Log("No inactive bullets found, creating a new one.");
-        Bullet newBullet = Instantiate(projectilePrefab).GetComponent<Bullet>();
-        newBullet.bulletTypeAttack = this;
+        ArrowBullet newBullet = Instantiate(projectilePrefab).GetComponent<ArrowBullet>();
+        newBullet.fatherAttack = this;
         newBullet.transform.SetParent(bulletsParent);
         bullets.Add(newBullet);
         newBullet.gameObject.SetActive(false);
