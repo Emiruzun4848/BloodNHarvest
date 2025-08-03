@@ -20,6 +20,7 @@ public class ArrowBullet : Bullet
     protected override void MoveBullet()
     {
         transform.position += direction * speed * Time.deltaTime;
+        Debug.Log("Bullet has been Moved ");
         ControlIsHitEnemy();
     }
     protected override void Update()
@@ -31,10 +32,6 @@ public class ArrowBullet : Bullet
         base.ResetVariable();
         lifeEnemyHits = baseLifeEnemyHits;
         hitedEnemies.Clear();
-    }
-    protected override void UpdateBullet()
-    {
-        base.UpdateBullet();
     }
     protected virtual void ControlIsHitEnemy()
     {
@@ -55,8 +52,9 @@ public class ArrowBullet : Bullet
     }
     protected override void ControlConditions()
     {
+        Debug.Log("Control Conditions Called");
         baseLifetime -= Time.deltaTime;
-        if (baseLifetime <= 0f || baseLifeEnemyHits <= 0 || fatherAttack.attackManager.CanAttack)
+        if (baseLifetime <= 0f || baseLifeEnemyHits <= 0)
         {
             baseIsEnabled = false;
             gameObject.SetActive(false);

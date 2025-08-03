@@ -2416,15 +2416,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1040278281468508638, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1040278281468508638, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
       propertyPath: bulletSpeed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1040278281468508638, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 409209466184284457, guid: 6a21d11c064ab3e46a990954c090f047, type: 3}
     - target: {fileID: 4801221549810455996, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
       propertyPath: detectRadius
-      value: 18
+      value: 25.1
       objectReference: {fileID: 0}
     - target: {fileID: 7882743980712686198, guid: 144ff2ce5a3847043ba49efb883835f0, type: 3}
       propertyPath: m_Name
@@ -2498,7 +2502,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7699693925526514958}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 234f5161b179cb640a0d054aa72cf49a, type: 3}
   m_Name: 
@@ -2507,7 +2511,7 @@ MonoBehaviour:
   attackType: 2
   attackPower: 0
   damage: 10
-  attackCooldown: 1
+  attackCooldown: 1.52
   attackRange: 183.49
   attackCondition: 1
   canAttack: 1
